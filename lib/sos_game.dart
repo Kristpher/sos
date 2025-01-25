@@ -178,8 +178,7 @@ class _SOSState extends State<SOS> {
                               int f = 0;
                               List<List<int>> temp = [];
                               if (r < 3 &&
-                                  gridValues[r + 1][c] == 'O' &&
-                                  r + 2 < 4) {
+                                  gridValues[r + 1][c] == 'O' ) {
                                 if (gridValues[r + 2][c] == 'S') {
                                   f++;
                                   temp.add([r, c]);
@@ -189,8 +188,7 @@ class _SOSState extends State<SOS> {
                                 }
                               }
                               if (r > 1 &&
-                                  gridValues[r - 1][c] == 'O' &&
-                                  r - 2 >= 0) {
+                                  gridValues[r - 1][c] == 'O') {
                                 if (gridValues[r - 2][c] == 'S') {
                                   f++;
                                   temp.add([r, c]);
@@ -200,8 +198,7 @@ class _SOSState extends State<SOS> {
                                 }
                               }
                               if (c < 3 &&
-                                  gridValues[r][c + 1] == 'O' &&
-                                  c + 2 < 4) {
+                                  gridValues[r][c + 1] == 'O') {
                                 if (gridValues[r][c + 2] == 'S') {
                                   f++;
                                   temp.add([r, c]);
@@ -211,8 +208,7 @@ class _SOSState extends State<SOS> {
                                 }
                               }
                               if (c > 1 &&
-                                  gridValues[r][c - 1] == 'O' &&
-                                  c - 2 >= 0) {
+                                  gridValues[r][c - 1] == 'O' ) {
                                 if (gridValues[r][c - 2] == 'S') {
                                   f++;
                                   temp.add([r, c]);
@@ -235,9 +231,7 @@ class _SOSState extends State<SOS> {
                               }
                               if (r > 1 &&
                                   c > 1 &&
-                                  gridValues[r - 1][c - 1] == 'O' &&
-                                  r - 2 >= 0 &&
-                                  c - 2 >= 0) {
+                                  gridValues[r - 1][c - 1] == 'O' ) {
                                 if (gridValues[r - 2][c - 2] == 'S') {
                                   f++;
                                   temp.add([r, c]);
@@ -248,9 +242,7 @@ class _SOSState extends State<SOS> {
                               }
                               if (r < 3 &&
                                   c > 1 &&
-                                  gridValues[r + 1][c - 1] == 'O' &&
-                                  r + 2 < 4 &&
-                                  c - 2 >= 0) {
+                                  gridValues[r + 1][c - 1] == 'O' ) {
                                 if (gridValues[r + 2][c - 2] == 'S') {
                                   f++;
                                   temp.add([r, c]);
@@ -261,9 +253,7 @@ class _SOSState extends State<SOS> {
                               }
                               if (r > 1 &&
                                   c < 3 &&
-                                  gridValues[r - 1][c + 1] == 'O' &&
-                                  r - 2 >= 0 &&
-                                  c + 2 < 4) {
+                                  gridValues[r - 1][c + 1] == 'O' ) {
                                 if (gridValues[r - 2][c + 2] == 'S') {
                                   f++;
                                   temp.add([r, c]);
