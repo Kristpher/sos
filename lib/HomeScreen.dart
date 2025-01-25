@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
                       }),
                     );
                   },
-                  child: Text('Start Game')))),
+                child: Text('Start Game')))),
     );
   }
 }
