@@ -30,11 +30,10 @@ class _SOSState extends State<SOS> {
     for (var tile in temp) {
       int ro = tile[0];
       int co = tile[1];
-      if(count%2==1)
-      Tile_colors[ro][co] = Colors.green;
+      if (count % 2 == 1)
+        Tile_colors[ro][co] = Colors.green;
       else
-      Tile_colors[ro][co] = Colors.red;
-
+        Tile_colors[ro][co] = Colors.red;
     }
     Future.delayed(Duration(seconds: 1), () {
       setState(() {
@@ -62,7 +61,7 @@ class _SOSState extends State<SOS> {
                     child: Container(
                       padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
-                        color:Colors.red, // background color for Player 1
+                        color: Colors.red, // background color for Player 1
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
@@ -82,8 +81,7 @@ class _SOSState extends State<SOS> {
                     child: Container(
                       padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
-                        color:
-                            Colors.green, // background color for Player 2
+                        color: Colors.green, // background color for Player 2
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
@@ -120,7 +118,6 @@ class _SOSState extends State<SOS> {
                   crossAxisCount: 5, // 5 columns
                   crossAxisSpacing: 4,
                   mainAxisSpacing: 4,
-                  
                 ),
                 padding: EdgeInsets.all(5),
                 itemCount: 25, // Total tiles (5x5 grid)
@@ -134,8 +131,17 @@ class _SOSState extends State<SOS> {
                         selectedRow = row;
                         selectedCol = col;
                         reset = false;
-
-                        if (!reset) message = 'Select S or O';
+                        if (count <24) {
+                          if (!reset) message = 'Select S or O';
+                        }
+                        else{
+                          if(p1>p2)
+                          message='Player 1 Wins';
+                          else if(p2>p1)
+                          message='Player 2 Wins';
+                          else
+                          message="it is a tie";
+                        }
                       });
                     },
                     child: Container(
@@ -177,8 +183,7 @@ class _SOSState extends State<SOS> {
                               int c = selectedCol;
                               int f = 0;
                               List<List<int>> temp = [];
-                              if (r < 3 &&
-                                  gridValues[r + 1][c] == 'O' ) {
+                              if (r < 3 && gridValues[r + 1][c] == 'O') {
                                 if (gridValues[r + 2][c] == 'S') {
                                   f++;
                                   temp.add([r, c]);
@@ -187,8 +192,7 @@ class _SOSState extends State<SOS> {
                                   print(temp);
                                 }
                               }
-                              if (r > 1 &&
-                                  gridValues[r - 1][c] == 'O') {
+                              if (r > 1 && gridValues[r - 1][c] == 'O') {
                                 if (gridValues[r - 2][c] == 'S') {
                                   f++;
                                   temp.add([r, c]);
@@ -197,8 +201,7 @@ class _SOSState extends State<SOS> {
                                   print(temp);
                                 }
                               }
-                              if (c < 3 &&
-                                  gridValues[r][c + 1] == 'O') {
+                              if (c < 3 && gridValues[r][c + 1] == 'O') {
                                 if (gridValues[r][c + 2] == 'S') {
                                   f++;
                                   temp.add([r, c]);
@@ -207,8 +210,7 @@ class _SOSState extends State<SOS> {
                                   print(temp);
                                 }
                               }
-                              if (c > 1 &&
-                                  gridValues[r][c - 1] == 'O' ) {
+                              if (c > 1 && gridValues[r][c - 1] == 'O') {
                                 if (gridValues[r][c - 2] == 'S') {
                                   f++;
                                   temp.add([r, c]);
@@ -219,8 +221,7 @@ class _SOSState extends State<SOS> {
                               }
                               if (r < 3 &&
                                   c < 3 &&
-                                  gridValues[r + 1][c + 1] == 'O' 
-                                  ) {
+                                  gridValues[r + 1][c + 1] == 'O') {
                                 if (gridValues[r + 2][c + 2] == 'S') {
                                   f++;
                                   temp.add([r, c]);
@@ -231,7 +232,7 @@ class _SOSState extends State<SOS> {
                               }
                               if (r > 1 &&
                                   c > 1 &&
-                                  gridValues[r - 1][c - 1] == 'O' ) {
+                                  gridValues[r - 1][c - 1] == 'O') {
                                 if (gridValues[r - 2][c - 2] == 'S') {
                                   f++;
                                   temp.add([r, c]);
@@ -242,7 +243,7 @@ class _SOSState extends State<SOS> {
                               }
                               if (r < 3 &&
                                   c > 1 &&
-                                  gridValues[r + 1][c - 1] == 'O' ) {
+                                  gridValues[r + 1][c - 1] == 'O') {
                                 if (gridValues[r + 2][c - 2] == 'S') {
                                   f++;
                                   temp.add([r, c]);
@@ -253,7 +254,7 @@ class _SOSState extends State<SOS> {
                               }
                               if (r > 1 &&
                                   c < 3 &&
-                                  gridValues[r - 1][c + 1] == 'O' ) {
+                                  gridValues[r - 1][c + 1] == 'O') {
                                 if (gridValues[r - 2][c + 2] == 'S') {
                                   f++;
                                   temp.add([r, c]);
@@ -262,11 +263,11 @@ class _SOSState extends State<SOS> {
                                   print(temp);
                                 }
                               }
-                              if (f>0) {
+                              if (f > 0) {
                                 if (count % 2 == 0) {
-                                  p1=p1+f;
+                                  p1 = p1 + f;
                                 } else {
-                                  p2=p2+f;
+                                  p2 = p2 + f;
                                 }
                               }
                               changecolor(temp);
@@ -341,15 +342,15 @@ class _SOSState extends State<SOS> {
                                 temp.add([r - 1, c + 1]);
                                 print(temp);
                               }
-                              if (f>0) {
+                              if (f > 0) {
                                 if (count % 2 == 0) {
-                                  p1=p1+f;
+                                  p1 = p1 + f;
                                 } else {
-                                  p2=p2+f;
+                                  p2 = p2 + f;
                                 }
                               }
                               // Reset the selection
-                               changecolor(temp);
+                              changecolor(temp);
                               selectedRow = -1;
                               selectedCol = -1;
                               count++;
@@ -384,10 +385,7 @@ class _SOSState extends State<SOS> {
                             Tile_colors[i][j] =
                                 const Color.fromARGB(255, 184, 195, 213);
                             reset = true;
-                            setState(() {
-                            
-                            });
-                            
+                            setState(() {});
                           }
                         }
                       },
