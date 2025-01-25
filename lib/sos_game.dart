@@ -36,13 +36,15 @@ class _SOSState extends State<SOS> {
         Tile_colors[ro][co] = Colors.red;
     }
     Future.delayed(Duration(seconds: 1), () {
-      setState(() {
-        for (var tile in temp) {
-          int row = tile[0];
-          int col = tile[1];
-          Tile_colors[row][col] = Colors.yellow;
-        }
-      });
+      if (reset == false) {
+        setState(() {
+          for (var tile in temp) {
+            int row = tile[0];
+            int col = tile[1];
+            Tile_colors[row][col] = Colors.yellow;
+          }
+        });
+      }
     });
   }
 
@@ -131,16 +133,15 @@ class _SOSState extends State<SOS> {
                         selectedRow = row;
                         selectedCol = col;
                         reset = false;
-                        if (count <24) {
+                        if (count < 24) {
                           if (!reset) message = 'Select S or O';
-                        }
-                        else{
-                          if(p1>p2)
-                          message='Player 1 Wins';
-                          else if(p2>p1)
-                          message='Player 2 Wins';
+                        } else {
+                          if (p1 > p2)
+                            message = 'Player 1 Wins';
+                          else if (p2 > p1)
+                            message = 'Player 2 Wins';
                           else
-                          message="it is a tie";
+                            message = "it is a tie";
                         }
                       });
                     },
@@ -177,105 +178,108 @@ class _SOSState extends State<SOS> {
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red),
                           onPressed: () {
-                            setState(() {
-                              gridValues[selectedRow][selectedCol] = 'S';
-                              int r = selectedRow;
-                              int c = selectedCol;
-                              int f = 0;
-                              List<List<int>> temp = [];
-                              if (r < 3 && gridValues[r + 1][c] == 'O') {
-                                if (gridValues[r + 2][c] == 'S') {
-                                  f++;
-                                  temp.add([r, c]);
-                                  temp.add([r + 1, c]);
-                                  temp.add([r + 2, c]);
-                                  print(temp);
+                            if (gridValues[selectedRow][selectedCol] != 'S' &&
+                                gridValues[selectedRow][selectedCol] != 'O') {
+                              setState(() {
+                                gridValues[selectedRow][selectedCol] = 'S';
+                                int r = selectedRow;
+                                int c = selectedCol;
+                                int f = 0;
+                                List<List<int>> temp = [];
+                                if (r < 3 && gridValues[r + 1][c] == 'O') {
+                                  if (gridValues[r + 2][c] == 'S') {
+                                    f++;
+                                    temp.add([r, c]);
+                                    temp.add([r + 1, c]);
+                                    temp.add([r + 2, c]);
+                                    print(temp);
+                                  }
                                 }
-                              }
-                              if (r > 1 && gridValues[r - 1][c] == 'O') {
-                                if (gridValues[r - 2][c] == 'S') {
-                                  f++;
-                                  temp.add([r, c]);
-                                  temp.add([r - 1, c]);
-                                  temp.add([r - 2, c]);
-                                  print(temp);
+                                if (r > 1 && gridValues[r - 1][c] == 'O') {
+                                  if (gridValues[r - 2][c] == 'S') {
+                                    f++;
+                                    temp.add([r, c]);
+                                    temp.add([r - 1, c]);
+                                    temp.add([r - 2, c]);
+                                    print(temp);
+                                  }
                                 }
-                              }
-                              if (c < 3 && gridValues[r][c + 1] == 'O') {
-                                if (gridValues[r][c + 2] == 'S') {
-                                  f++;
-                                  temp.add([r, c]);
-                                  temp.add([r, c + 1]);
-                                  temp.add([r, c + 2]);
-                                  print(temp);
+                                if (c < 3 && gridValues[r][c + 1] == 'O') {
+                                  if (gridValues[r][c + 2] == 'S') {
+                                    f++;
+                                    temp.add([r, c]);
+                                    temp.add([r, c + 1]);
+                                    temp.add([r, c + 2]);
+                                    print(temp);
+                                  }
                                 }
-                              }
-                              if (c > 1 && gridValues[r][c - 1] == 'O') {
-                                if (gridValues[r][c - 2] == 'S') {
-                                  f++;
-                                  temp.add([r, c]);
-                                  temp.add([r, c - 1]);
-                                  temp.add([r, c - 2]);
-                                  print(temp);
+                                if (c > 1 && gridValues[r][c - 1] == 'O') {
+                                  if (gridValues[r][c - 2] == 'S') {
+                                    f++;
+                                    temp.add([r, c]);
+                                    temp.add([r, c - 1]);
+                                    temp.add([r, c - 2]);
+                                    print(temp);
+                                  }
                                 }
-                              }
-                              if (r < 3 &&
-                                  c < 3 &&
-                                  gridValues[r + 1][c + 1] == 'O') {
-                                if (gridValues[r + 2][c + 2] == 'S') {
-                                  f++;
-                                  temp.add([r, c]);
-                                  temp.add([r + 1, c + 1]);
-                                  temp.add([r + 2, c + 2]);
-                                  print(temp);
+                                if (r < 3 &&
+                                    c < 3 &&
+                                    gridValues[r + 1][c + 1] == 'O') {
+                                  if (gridValues[r + 2][c + 2] == 'S') {
+                                    f++;
+                                    temp.add([r, c]);
+                                    temp.add([r + 1, c + 1]);
+                                    temp.add([r + 2, c + 2]);
+                                    print(temp);
+                                  }
                                 }
-                              }
-                              if (r > 1 &&
-                                  c > 1 &&
-                                  gridValues[r - 1][c - 1] == 'O') {
-                                if (gridValues[r - 2][c - 2] == 'S') {
-                                  f++;
-                                  temp.add([r, c]);
-                                  temp.add([r - 1, c - 1]);
-                                  temp.add([r - 2, c - 2]);
-                                  print(temp);
+                                if (r > 1 &&
+                                    c > 1 &&
+                                    gridValues[r - 1][c - 1] == 'O') {
+                                  if (gridValues[r - 2][c - 2] == 'S') {
+                                    f++;
+                                    temp.add([r, c]);
+                                    temp.add([r - 1, c - 1]);
+                                    temp.add([r - 2, c - 2]);
+                                    print(temp);
+                                  }
                                 }
-                              }
-                              if (r < 3 &&
-                                  c > 1 &&
-                                  gridValues[r + 1][c - 1] == 'O') {
-                                if (gridValues[r + 2][c - 2] == 'S') {
-                                  f++;
-                                  temp.add([r, c]);
-                                  temp.add([r + 1, c - 1]);
-                                  temp.add([r + 2, c - 2]);
-                                  print(temp);
+                                if (r < 3 &&
+                                    c > 1 &&
+                                    gridValues[r + 1][c - 1] == 'O') {
+                                  if (gridValues[r + 2][c - 2] == 'S') {
+                                    f++;
+                                    temp.add([r, c]);
+                                    temp.add([r + 1, c - 1]);
+                                    temp.add([r + 2, c - 2]);
+                                    print(temp);
+                                  }
                                 }
-                              }
-                              if (r > 1 &&
-                                  c < 3 &&
-                                  gridValues[r - 1][c + 1] == 'O') {
-                                if (gridValues[r - 2][c + 2] == 'S') {
-                                  f++;
-                                  temp.add([r, c]);
-                                  temp.add([r - 1, c + 1]);
-                                  temp.add([r - 2, c + 2]);
-                                  print(temp);
+                                if (r > 1 &&
+                                    c < 3 &&
+                                    gridValues[r - 1][c + 1] == 'O') {
+                                  if (gridValues[r - 2][c + 2] == 'S') {
+                                    f++;
+                                    temp.add([r, c]);
+                                    temp.add([r - 1, c + 1]);
+                                    temp.add([r - 2, c + 2]);
+                                    print(temp);
+                                  }
                                 }
-                              }
-                              if (f > 0) {
-                                if (count % 2 == 0) {
-                                  p1 = p1 + f;
-                                } else {
-                                  p2 = p2 + f;
+                                if (f > 0) {
+                                  if (count % 2 == 0) {
+                                    p1 = p1 + f;
+                                  } else {
+                                    p2 = p2 + f;
+                                  }
                                 }
-                              }
-                              changecolor(temp);
-                              // Reset the selection
-                              selectedRow = -1;
-                              selectedCol = -1;
-                              count++;
-                            });
+                                changecolor(temp);
+                                // Reset the selection
+                                selectedRow = -1;
+                                selectedCol = -1;
+                                count++;
+                              });
+                            }
                           },
                           child: Container(
                               height: 50,
@@ -292,69 +296,72 @@ class _SOSState extends State<SOS> {
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blue),
                           onPressed: () {
-                            setState(() {
-                              gridValues[selectedRow][selectedCol] = 'O';
-                              int r = selectedRow;
-                              int c = selectedCol;
-                              int f = 0;
-                              List<List<int>> temp = [];
-                              if (r > 0 &&
-                                  gridValues[r - 1][c] == 'S' &&
-                                  r + 1 <= 4 &&
-                                  gridValues[r + 1][c] == 'S') {
-                                f++;
-                                temp.add([r, c]);
-                                temp.add([r - 1, c]);
-                                temp.add([r + 1, c]);
-                                print(temp);
-                              }
-                              if (c > 0 &&
-                                  gridValues[r][c - 1] == 'S' &&
-                                  c + 1 <= 4 &&
-                                  gridValues[r][c + 1] == 'S') {
-                                f++;
-                                temp.add([r, c]);
-                                temp.add([r, c - 1]);
-                                temp.add([r, c + 1]);
-                                print(temp);
-                              }
-                              if (r > 0 &&
-                                  c > 0 &&
-                                  gridValues[r - 1][c - 1] == 'S' &&
-                                  r + 1 <= 4 &&
-                                  c + 1 <= 4 &&
-                                  gridValues[r + 1][c + 1] == 'S') {
-                                f++;
-                                temp.add([r, c]);
-                                temp.add([r - 1, c - 1]);
-                                temp.add([r + 1, c + 1]);
-                                print(temp);
-                              }
-                              if (r < 4 &&
-                                  c > 0 &&
-                                  gridValues[r + 1][c - 1] == 'S' &&
-                                  r - 1 >= 0 &&
-                                  c + 1 <= 4 &&
-                                  gridValues[r - 1][c + 1] == 'S') {
-                                f++;
-                                temp.add([r, c]);
-                                temp.add([r + 1, c - 1]);
-                                temp.add([r - 1, c + 1]);
-                                print(temp);
-                              }
-                              if (f > 0) {
-                                if (count % 2 == 0) {
-                                  p1 = p1 + f;
-                                } else {
-                                  p2 = p2 + f;
+                            if (gridValues[selectedRow][selectedCol] != 'S' &&
+                                gridValues[selectedRow][selectedCol] != 'O') {
+                              setState(() {
+                                gridValues[selectedRow][selectedCol] = 'O';
+                                int r = selectedRow;
+                                int c = selectedCol;
+                                int f = 0;
+                                List<List<int>> temp = [];
+                                if (r > 0 &&
+                                    gridValues[r - 1][c] == 'S' &&
+                                    r + 1 <= 4 &&
+                                    gridValues[r + 1][c] == 'S') {
+                                  f++;
+                                  temp.add([r, c]);
+                                  temp.add([r - 1, c]);
+                                  temp.add([r + 1, c]);
+                                  print(temp);
                                 }
-                              }
-                              // Reset the selection
-                              changecolor(temp);
-                              selectedRow = -1;
-                              selectedCol = -1;
-                              count++;
-                            });
+                                if (c > 0 &&
+                                    gridValues[r][c - 1] == 'S' &&
+                                    c + 1 <= 4 &&
+                                    gridValues[r][c + 1] == 'S') {
+                                  f++;
+                                  temp.add([r, c]);
+                                  temp.add([r, c - 1]);
+                                  temp.add([r, c + 1]);
+                                  print(temp);
+                                }
+                                if (r > 0 &&
+                                    c > 0 &&
+                                    gridValues[r - 1][c - 1] == 'S' &&
+                                    r + 1 <= 4 &&
+                                    c + 1 <= 4 &&
+                                    gridValues[r + 1][c + 1] == 'S') {
+                                  f++;
+                                  temp.add([r, c]);
+                                  temp.add([r - 1, c - 1]);
+                                  temp.add([r + 1, c + 1]);
+                                  print(temp);
+                                }
+                                if (r < 4 &&
+                                    c > 0 &&
+                                    gridValues[r + 1][c - 1] == 'S' &&
+                                    r - 1 >= 0 &&
+                                    c + 1 <= 4 &&
+                                    gridValues[r - 1][c + 1] == 'S') {
+                                  f++;
+                                  temp.add([r, c]);
+                                  temp.add([r + 1, c - 1]);
+                                  temp.add([r - 1, c + 1]);
+                                  print(temp);
+                                }
+                                if (f > 0) {
+                                  if (count % 2 == 0) {
+                                    p1 = p1 + f;
+                                  } else {
+                                    p2 = p2 + f;
+                                  }
+                                }
+                                // Reset the selection
+                                changecolor(temp);
+                                selectedRow = -1;
+                                selectedCol = -1;
+                                count++;
+                              });
+                            }
                           },
                           child: Container(
                               height: 50,
