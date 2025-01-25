@@ -120,7 +120,9 @@ class _SOSState extends State<SOS> {
                   crossAxisCount: 5, // 5 columns
                   crossAxisSpacing: 4,
                   mainAxisSpacing: 4,
+                  
                 ),
+                padding: EdgeInsets.all(5),
                 itemCount: 25, // Total tiles (5x5 grid)
                 itemBuilder: (context, index) {
                   int row = index ~/ 5; // Row index
@@ -221,9 +223,8 @@ class _SOSState extends State<SOS> {
                               }
                               if (r < 3 &&
                                   c < 3 &&
-                                  gridValues[r + 1][c + 1] == 'O' &&
-                                  r + 2 < 4 &&
-                                  c + 2 < 4) {
+                                  gridValues[r + 1][c + 1] == 'O' 
+                                  ) {
                                 if (gridValues[r + 2][c + 2] == 'S') {
                                   f++;
                                   temp.add([r, c]);
