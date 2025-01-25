@@ -1,0 +1,102 @@
+Expanded(
+                    child: GridView.count(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 8,
+                      padding: const EdgeInsets.all(16),
+                      children: List.generate(2, (index) {
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              // Update the selected tile with the chosen value
+                              gridValues[selectedRow][selectedCol] =
+                                  'S';
+
+                              int r = selectedRow;
+                              int c = selectedCol;
+                              int f = 0;
+                              List<List<int>> temp = [];
+                              if (index == 0) {
+                             
+                              } else {
+                                if (r > 0 &&
+                                    gridValues[r - 1][c] == 'S' &&
+                                    r + 1 <= 4 &&
+                                    gridValues[r + 1][c] == 'S') {
+                                  f = 1;
+                                  temp.add([r, c]);
+                                  temp.add([r - 1, c]);
+                                  temp.add([r + 1, c]);
+                                  print(temp);
+                                }
+                                if (c > 0 &&
+                                    gridValues[r][c - 1] == 'S' &&
+                                    c + 1 <= 4 &&
+                                    gridValues[r][c + 1] == 'S') {
+                                  f = 1;
+                                  temp.add([r, c]);
+                                  temp.add([r, c - 1]);
+                                  temp.add([r, c + 1]);
+                                  print(temp);
+                                }
+                                if (r > 0 &&
+                                    c > 0 &&
+                                    gridValues[r - 1][c - 1] == 'S' &&
+                                    r + 1 <= 4 &&
+                                    c + 1 <= 4 &&
+                                    gridValues[r + 1][c + 1] == 'S') {
+                                  f = 1;
+                                  temp.add([r, c]);
+                                  temp.add([r - 1, c - 1]);
+                                  temp.add([r + 1, c + 1]);
+                                  print(temp);
+                                }
+                                if (r < 4 &&
+                                    c > 0 &&
+                                    gridValues[r + 1][c - 1] == 'S' &&
+                                    r - 1 >= 0 &&
+                                    c + 1 <= 4 &&
+                                    gridValues[r - 1][c + 1] == 'S') {
+                                  f = 1;
+                                  temp.add([r, c]);
+                                  temp.add([r + 1, c - 1]);
+                                  temp.add([r - 1, c + 1]);
+                                  print(temp);
+                                }
+                              }
+
+                              if (f == 1) {
+                                if (count % 2 == 0) {
+                                  p1++;
+                                } else {
+                                  p2++;
+                                }
+                              }
+                              // Reset the selection
+                              selectedRow = -1;
+                              selectedCol = -1;
+                              count++;
+                            });
+                          },
+                          child: Container(
+                           
+                            decoration: BoxDecoration(
+                              color: Colors.orangeAccent,
+                              borderRadius: BorderRadius.circular(10),
+                              
+                            ),
+                            child: Center(
+                              child: Text(
+                                Ops1[index],
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
